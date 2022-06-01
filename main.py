@@ -1,22 +1,23 @@
-from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.middleware.cors import CORSMiddleware
-from databases import Database
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy.orm import Session
 
-DATABASE_URL = "sqlite:///Stabis.db"
+import crud, models, schemas
+from database import SessionLocal, engine
 
-@app.on_event("startup")
-async def database_connect():
-    await database.connect()
+models.Base.metadata.create_all(bind=engine)
 
-
-@app.on_event("shutdown")
-async def database_disconnect():
-    await database.disconnect()
+app = FastAPI()
 
 
-@app.post("/test")
-async def fetch_data(id: int):
-    query = "SELECT * FROM tablename WHERE ID={}".format(str(id))
-    results = await database.fetch_all(query=query)
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-    return  results
+
+@app.get("/objects/", response_model=list[schemas.Object])
+def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    objects = crud.get_objects(db, skip=skip, limit=limit)
+    return objects
