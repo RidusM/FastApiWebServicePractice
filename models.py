@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date, Time
 from sqlalchemy.orm import relationship
 
+import database
 from database import Base
 
 
@@ -14,4 +15,5 @@ class Object(Base):
     location = Column(String, index=True, nullable=True)
     latitude = Column(String, nullable=True)
     longitude = Column(String, nullable=True)
+
 
