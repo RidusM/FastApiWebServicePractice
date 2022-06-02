@@ -48,3 +48,14 @@ def delete_object(title: str, session: Session = Depends(get_session)):
 def create_object(object: schemas.ObjectCreate, session: Session = Depends(get_session)):
     db_user = crud.create_object(session, object)
     return crud.create_object(session, object)
+
+@itemrouter.patch("/objects/{name}")
+def update_object(title: str, newtitle: str, session: Session = Depends(get_session)):
+    item = crud.get_objects_by_name(session=session, title=title)
+    if item is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+    item.title = newtitle
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item

@@ -14,6 +14,7 @@ def get_objects_by_name(session: Session, title: str) -> Object:
 def get_objects(session: Session, skip: int = 0, limit: int = 100) -> List[Object]:
     return session.query(Object).offset(skip).limit(limit).all()
 
+
 def create_object(session: Session, object: schemas.ObjectCreate):
     db_objects = models.Object(title=object.title, location=object.location, latitude=object.latitude, longitude= object.longitude)
     session.add(db_objects)
