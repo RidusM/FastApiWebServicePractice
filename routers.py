@@ -19,7 +19,7 @@ def get_session():
         session.close()
 
 
-@itemrouter.get("/items/", response_model=List[ObjectBase])
+@itemrouter.get("/objects/", response_model=List[ObjectBase])
 def read_items(
     skip: int = 0, limit: int = 100, session: Session = Depends(get_session)
 ):
@@ -27,7 +27,7 @@ def read_items(
     return [i.serialize for i in items]
 
 
-@itemrouter.get("/items/{name}", response_model=ObjectBase)
+@itemrouter.get("/objects/{name}", response_model=ObjectBase)
 def read_item(title: str, session: Session = Depends(get_session)):
     item = crud.get_item_by_name(session=session, title=title)
     if item is None:
