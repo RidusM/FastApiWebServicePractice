@@ -46,7 +46,6 @@ def delete_object(title: str, session: Session = Depends(get_session)):
 
 @itemrouter.post("/objects/")
 def create_object(object: schemas.ObjectCreate, session: Session = Depends(get_session)):
-    db_user = crud.create_object(session, object)
     return crud.create_object(session, object)
 
 @itemrouter.patch("/objects/{name}")
