@@ -21,8 +21,7 @@ class Object(Base):
     longitude = Column(String)
 
 
-    def __init__(self, id:int, title:str, location:str, latitude:str, longitude:str):
-        self.id = id
+    def __init__(self, title:str, location:str, latitude:str, longitude:str):
         self.title = title
         self.location = location
         self.latitude = latitude
