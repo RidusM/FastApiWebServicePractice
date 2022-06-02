@@ -33,3 +33,12 @@ def read_item(title: str, session: Session = Depends(get_session)):
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
     return item.serialize
+
+@itemrouter.delete("/objects/{name}")
+def delete_object(title: str, session: Session = Depends(get_session)):
+    item = crud.get_item_by_name(session=session, title=title)
+    if item is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+    session.delete(item)
+    session.commit()
+    return {"ok": True}
