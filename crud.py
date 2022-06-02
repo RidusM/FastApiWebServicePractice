@@ -1,6 +1,13 @@
-from sqlalchemy.orm import Session
-import models, schemas
+from typing import List
+
+from sqlalchemy.orm import Session  # type: ignore
+
+from models import Object
 
 
-def get_objects(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Object).offset(skip).limit(limit).all()
+def get_item_by_name(session: Session, title: str) -> Object:
+    return session.query(Object).filter(Object.name == object).first()
+
+
+def get_items(session: Session, skip: int = 0, limit: int = 100) -> List[Object]:
+    return session.query(Object).offset(skip).limit(limit).all()

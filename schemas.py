@@ -1,19 +1,13 @@
-from typing import Union
+from datetime import datetime
 
 from pydantic import BaseModel
 
 
 class ObjectBase(BaseModel):
-    title: str
-    location: Union[str, None] = None
-
-
-class ObjectCreate(ObjectBase):
-    pass
-
-
-class Object(ObjectBase):
     id: int
-
-    class Config:
-        orm_mode = True
+    title: str
+    date: str
+    time: str
+    location: str
+    latitude: str
+    longitude: str
