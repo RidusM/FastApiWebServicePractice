@@ -6,6 +6,8 @@ from pydantic import BaseModel
 
 class ObjectBase(BaseModel):
     title: str
+    time: str
+    date: str
     location: str
     latitude: str
     longitude: str
@@ -13,5 +15,8 @@ class ObjectBase(BaseModel):
 class ObjectUpdate(BaseModel):
     newtitle: str
 
-class ObjectCreate(ObjectBase):
-    pass
+class ObjectCreate(BaseModel):
+    title: str
+    location: str
+    latitude: str
+    longitude: str
