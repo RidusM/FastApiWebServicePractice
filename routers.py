@@ -11,7 +11,6 @@ from schemas import ObjectBase
 models.Base.metadata.create_all(bind=engine)
 itemrouter = APIRouter()
 
-
 def get_session():
     session = SessionLocal()
     try:
@@ -45,8 +44,8 @@ def delete_object(title: str, session: Session = Depends(get_session)):
     return {"ok": True}
 
 @itemrouter.post("/objects/")
-def create_object(object: schemas.ObjectCreate, session: Session = Depends(get_session)):
-    return crud.create_object(session, object)
+def create_object(title: str, location: str, latitude: str, longitude: str, session: Session = Depends(get_session)):
+    return crud.create_object(session, title, location, latitude, longitude)
 
 @itemrouter.patch("/objects/{name}")
 def update_object(title: str, newtitle: str, session: Session = Depends(get_session)):
