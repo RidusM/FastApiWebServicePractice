@@ -44,8 +44,8 @@ def delete_object(title: str, session: Session = Depends(get_session)):
     return {"ok": True}
 
 @itemrouter.post("/objects/")
-def create_object(title: str, location: str, latitude: str, longitude: str, session: Session = Depends(get_session)):
-    return crud.create_object(session, title, location, latitude, longitude)
+def create_object(title: str, location: str, latitude: str, longitude: str, capacity:int, session: Session = Depends(get_session)):
+    return crud.create_object(session, title, location, latitude, longitude, capacity)
 
 @itemrouter.patch("/objects/{name}")
 def update_object(title: str, newtitle: str, session: Session = Depends(get_session)):

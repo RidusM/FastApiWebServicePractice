@@ -13,12 +13,12 @@ dtt = dt.strftime(time_format)
 dtd = dt.strftime(date_format)
 
 association_table = Table(
-    "objectcars",
+    "ObjectCars",
     Base.metadata,
-    Column("id", Integer, primary_key=True),
-    Column("object_id", Integer, ForeignKey("objects.id")),
-    Column("cars_id", Integer, ForeignKey("cars.id")),
+    Column("object_id", ForeignKey("objects.id")),
+    Column("car_id", ForeignKey("cars.id")),
 )
+
 
 class ObjectDict(TypedDict):
     id: int
@@ -30,6 +30,15 @@ class ObjectDict(TypedDict):
     time: str
     capacity: int
 
+class Car(Base):
+    __tablename__ = "cars"
+
+    id = Column(Integer, primary_key=True, index=True)
+    Model = Column(String, nullable=False)
+    Number = Column(String, nullable=False, index=True)
+    Capacity = Column(Integer, nullable=False)
+    object = relationship('Object', secondary=association_table)
+
 class Object(Base):
     __tablename__ = "objects"
 
@@ -40,32 +49,21 @@ class Object(Base):
     location = Column(String, index=True)
     latitude = Column(String)
     longitude = Column(String)
-    capacity = Column(String)
-    car = relationship('cars', secondary=association_table, backref='objects')
+    capacity = Column(Integer, nullable=False)
+    car = relationship('Car', secondary=association_table)
 
-class Car(Base):
-    __tablename__ = "cars"
-
-    id = Column(Integer, primary_key=True, index=True)
-    Model = Column(String, nullable=False)
-    Number = Column(String, nullable=False, index=True)
-    Capacity = Column(Integer, nullable=False)
-    object = relationship('objects', secondary=association_table, backref='cars')
-
-
-
-    def __init__(self, title:str, location:str, latitude:str, longitude:str, date:dtd, time:dtt):
+    def __init__(self, title:str, location:str, latitude:str, longitude:str, date:dtd, time:dtt, capacity):
         self.date = date
         self.time = time
         self.title = title
         self.location = location
         self.latitude = latitude
         self.longitude = longitude
+        self.capacity = capacity
 
     def __repr__(self) -> str:
         return f"{self.title}"
 
     @property
     def serialize(self) -> ObjectDict:
-        return {"id": self.id, "title": self.title, "location": self.location, "latitude": self.latitude, "longitude": self.longitude, "date": self.date, "time": self.time}
-
+        return {"id": self.id, "title": self.title, "location": self.location, "latitude": self.latitude, "longitude": self.longitude, "date": self.date, "time": self.time, "capacity": self.capacity}

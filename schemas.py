@@ -11,6 +11,7 @@ class ObjectBase(BaseModel):
     location: str
     latitude: str
     longitude: str
+    capacity: int
 
 class ObjectUpdate(BaseModel):
     newtitle: str
@@ -20,3 +21,4 @@ class ObjectCreate(BaseModel):
     location: str
     latitude: str
     longitude: str
+    capacity: int
