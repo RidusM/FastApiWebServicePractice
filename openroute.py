@@ -2,15 +2,20 @@ import openrouteservice
 from requests import Session
 from sqlalchemy import select
 from sqlalchemy.orm import session
-
+import sqlite3 as sl
 from models import Object
 
 token = None
 with open("token.txt") as f:
     token = f.read().strip()
-coords = ((8.34234,48.23424),(8.34423,48.26424))
 
+def db_table_select():
+    conn = sl.connect('Stabis.db', check_same_thread=False)
+    cursor = conn.cursor()
+    cursor.execute("SELECT latitude, longitude FROM objects")
+    obInfo = [item for item in cursor.fetchall()]
+    return obInfo
+print(db_table_select())
 client = openrouteservice.Client(key=token)
-routes= client.directions(coords)
-row = session.execute(select(Object.latitude, Object.longitude)).first()
-print(row)
+routes= client.directions(db_table_select())
+print (routes)
