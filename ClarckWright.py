@@ -1,21 +1,39 @@
 import requests
 import time
 import datetime
+import sqlite3 as sl
+
+conn = sl.connect('Stabis.db', check_same_thread=False)
+cursor = conn.cursor()
+
+def db_table_selectAll():
+    cursor.execute("SELECT id, latitude, longitude FROM objects")
+    row = cursor.fetchone()
+    out = []
+    while row is not None:
+        out.append("""\n<tr><td align="center">%s</td>""" % row[0])
+        out.append("""\n<td align="center">%s</td>""" % row[1])
+        out.append("""\n<td align="center">%s</td>""" % row[2])
+        row = cursor.fetchone()
+    return ''.join(out)
+
+print(db_table_selectAll())
 
 token = None
-with open("token.txt") as f:
+with open("token2.txt") as f:
     token = f.read().strip()
 
 API_KEY = f'{token}'
 print(API_KEY)
 API_ROOT_ENDPOINT = 'https://courier.yandex.ru/vrs/api/v1'
 
+
 payload = {
   "depot": {
       "id": 0,
       "point": {
-          "lat": 55.734157,
-          "lon": 37.589346
+          "lat": 57.156705,
+          "lon": 65.447281
       },
       "time_window": "07:00-18:00"
   },
@@ -28,6 +46,15 @@ payload = {
           "point": {
               "lat": 55.708272,
               "lon": 37.46826
+          },
+          "time_window": "07:00-18:00"
+      }
+  ],
+  "locations": [{
+          "id": 1,
+          "point": {
+              "lat": 57.157429,
+              "lon": 65.451158
           },
           "time_window": "07:00-18:00"
       }
