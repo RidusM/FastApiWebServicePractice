@@ -1,1 +1,1 @@
-https://yandex.ru/maps/?mode=routes&rtext=57.156705%2c65.447281~57.141521%2c65.553277~57.140484%2c65.505473~
+https://yandex.ru/courier/mvrp-map/#/97069fa1-c1c587e-74fa007d-273b4781

@@ -69,9 +69,6 @@ def db_table_select_Last_Location():
     """)
         row = cursor.fetchone()
     return ''.join(out[-1])
-print(db_table_select_Last_Location())
-
-
 
 token = None
 with open("token2.txt") as f:
@@ -157,10 +154,13 @@ if response.status_code == requests.codes.accepted:
             for waypoint in route['route']:
                 point = waypoint['node']['value']['point']
                 yamaps_url += '{}%2c{}~'.format(point['lat'], point['lon'])
-                f = open('itog.txt', 'w')
-                f.write(yamaps_url)
+                with open('itog.txt', 'w') as f:
+                    for waypoint in route:
+                        f.write("%s\n" % poll_url)
 
             print ('')
             print ('See route on Yandex.Maps:')
             print (yamaps_url)
-            print ('https://yandex.ru/courier/mvrp-map/#/c7242fab-73bc3b4d-9ece9179-8f815b62?route=0')
+            itog = str(f'https://yandex.ru/courier/mvrp-map/#/{request_id}')
+            f = open('itog.txt', 'w')
+            f.write(itog)

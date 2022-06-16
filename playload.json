@@ -18,10 +18,15 @@
             "capacity":{"weight_kg": 150 }
         },
     
-  
 {
             "id": 3,
             "capacity":{"weight_kg": 400 }
+        },
+    
+  
+{
+            "id": 4,
+            "capacity":{"weight_kg": 250 }
         }
     
   ],
@@ -97,16 +102,38 @@
         "shipment_size": { "weight_kg": 45}
       },
   
-  
 {
-            "id": 9,
-            "point":
-            {
+          "id": 9,
+          "point":
+          {
               "lat": 57.126087,
               "lon": 65.593953
-            },
+        },
         "time_window": "07:00-18:00",
         "shipment_size": { "weight_kg": 50}
+      },
+  
+{
+          "id": 11,
+          "point":
+          {
+              "lat": 57.117239,
+              "lon": 65.609534
+        },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 125}
+      },
+  
+  
+{
+            "id": 12,
+            "point":
+            {
+              "lat": 57.110351,
+              "lon": 65.648840
+            },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 35}
     }
     
   ]
