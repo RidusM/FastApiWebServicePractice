@@ -7,46 +7,61 @@
       },
       "time_window": "07:00-18:00"
   },
-  "vehicles": [{
-          "id": 1
-      }
+  "vehicles": [ 
+{
+            "id": 1,
+            "capacity":{"weight_kg": 250 }
+        },
+    
+  
+{
+            "id": 2,
+            "capacity":{"weight_kg": 150 }
+        }
+    
   ],
-
-  "locations": [{
+  "locations": [ 
+{
           "id": 1,
           "point": {
               "lat": 57.156562,
               "lon": 65.447387
           },
-          "time_window": "07:00-18:00"
+          "shipment_size": {"weight_kg": 25 }
+
       },
-  "locations": [{
+  
+{
           "id": 2,
           "point": {
               "lat": 57.157429,
               "lon": 65.451158
           },
-          "time_window": "07:00-18:00"
-      }
+          "shipment_size": {"weight_kg": 100 }
+
+      },
   
-  "locations": [{
+{
           "id": 3,
           "point": {
               "lat": 57.146139,
               "lon": 65.488451
           },
-          "time_window": "07:00-18:00"
-      }
+          "shipment_size": {"weight_kg": 50 }
+
+      },
   
-  "locations": [{
-          "id": 4,
-          "point": {
+  
+{
+            "id": 4,
+            "point": {
               "lat": 57.140484,
               "lon": 65.505473
-          },
-          "time_window": "07:00-18:00"
-      }
-
+            },
+            "shipment_size": {"weight_kg": 60 }
+        }
+    
+  ],
   "options": {
       "time_zone": 3,
       "quality": "normal"

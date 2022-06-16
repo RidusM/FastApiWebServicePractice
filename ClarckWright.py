@@ -7,22 +7,67 @@ import sqlite3 as sl
 conn = sl.connect('Stabis.db', check_same_thread=False)
 cursor = conn.cursor()
 
-def db_table_select_Location():
-    cursor.execute("SELECT id, latitude, longitude FROM objects")
+def db_table_select_Auto():
+    cursor.execute("SELECT id, capacity FROM cars")
     row = cursor.fetchone()
     out = []
     while row is not None:
-        out.append(f"""\n  "locations": [{{
+        out.append(f"""\n{{
+            "id": {row[0]},
+            "capacity":{{"weight_kg": {row[1]} }}
+        }},
+    """)
+        row = cursor.fetchone()
+    out.pop()
+    return ''.join(out)
+def db_table_select_Last_Auto():
+    cursor.execute("SELECT id, capacity FROM cars")
+    row = cursor.fetchone()
+    out = []
+    while row is not None:
+        out.append(f"""\n{{
+            "id": {row[0]},
+            "capacity":{{"weight_kg": {row[1]} }}
+        }}
+    """)
+        row = cursor.fetchone()
+    return ''.join(out[-1])
+def db_table_select_Location():
+    cursor.execute("SELECT id, latitude, longitude, capacity FROM objects")
+    row = cursor.fetchone()
+    out = []
+    while row is not None:
+        out.append(f"""\n{{
           "id": {row[0]},
           "point": {{
               "lat": {row[1]},
               "lon": {row[2]}
           }},
-          "time_window": "07:00-18:00"
-      }}
-  ],""")
+          "shipment_size": {{"weight_kg": {row[3]} }}
+
+      }},
+  """)
         row = cursor.fetchone()
+    out.pop()
     return ''.join(out)
+def db_table_select_Last_Location():
+    cursor.execute("SELECT id, latitude, longitude, capacity FROM objects")
+    row = cursor.fetchone()
+    out = []
+    while row is not None:
+        out.append(f"""\n{{
+            "id": {row[0]},
+            "point": {{
+              "lat": {row[1]},
+              "lon": {row[2]}
+            }},
+            "shipment_size": {{"weight_kg": {row[3]} }}
+        }}
+    """)
+        row = cursor.fetchone()
+    return ''.join(out[-1])
+print(db_table_select_Last_Location())
+
 
 
 token = None
@@ -43,11 +88,12 @@ payload = (f'''{{
       }},
       "time_window": "07:00-18:00"
   }},
-  "vehicles": [{{
-          "id": 1
-      }}
+  "vehicles": [ {db_table_select_Auto()}
+  {db_table_select_Last_Auto()}
   ],
-  {db_table_select_Location()}
+  "locations": [ {db_table_select_Location()}
+  {db_table_select_Last_Location()}
+  ],
   "options": {{
       "time_zone": 3,
       "quality": "normal"
