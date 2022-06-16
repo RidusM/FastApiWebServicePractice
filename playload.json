@@ -13,57 +13,101 @@
             "capacity":{"weight_kg": 250 }
         },
     
-  
 {
             "id": 2,
             "capacity":{"weight_kg": 150 }
-        }
+        },
     
-  ],
-  "locations": [ 
-{
-          "id": 1,
-          "point": {
-              "lat": 57.156562,
-              "lon": 65.447387
-          },
-          "shipment_size": {"weight_kg": 25 }
-
-      },
   
 {
-          "id": 2,
-          "point": {
-              "lat": 57.157429,
-              "lon": 65.451158
-          },
-          "shipment_size": {"weight_kg": 100 }
-
-      },
-  
-{
-          "id": 3,
-          "point": {
-              "lat": 57.146139,
-              "lon": 65.488451
-          },
-          "shipment_size": {"weight_kg": 50 }
-
-      },
-  
-  
-{
-            "id": 4,
-            "point": {
-              "lat": 57.140484,
-              "lon": 65.505473
-            },
-            "shipment_size": {"weight_kg": 60 }
+            "id": 3,
+            "capacity":{"weight_kg": 400 }
         }
     
   ],
   "options": {
       "time_zone": 3,
-      "quality": "normal"
+      "quality": "normal",
+      "routing_mode": "truck"
+    },
+  "locations": [ 
+{
+          "id": 2,
+          "point":
+          {
+              "lat": 57.157429,
+              "lon": 65.451158
+        },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 100}
+      },
+  
+{
+          "id": 3,
+          "point":
+          {
+              "lat": 57.146139,
+              "lon": 65.488451
+        },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 50}
+      },
+  
+{
+          "id": 4,
+          "point":
+          {
+              "lat": 57.140484,
+              "lon": 65.505473
+        },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 60}
+      },
+  
+{
+          "id": 5,
+          "point":
+          {
+              "lat": 57.141521,
+              "lon": 65.553277
+        },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 300}
+      },
+  
+{
+          "id": 6,
+          "point":
+          {
+              "lat": 57.137325,
+              "lon": 65.554117
+        },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 100}
+      },
+  
+{
+          "id": 7,
+          "point":
+          {
+              "lat": 57.134505,
+              "lon": 65.604467
+        },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 45}
+      },
+  
+  
+{
+            "id": 9,
+            "point":
+            {
+              "lat": 57.126087,
+              "lon": 65.593953
+            },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 50}
+    }
+    
+  ]
   }
-}

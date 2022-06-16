@@ -39,12 +39,13 @@ def db_table_select_Location():
     while row is not None:
         out.append(f"""\n{{
           "id": {row[0]},
-          "point": {{
+          "point":
+          {{
               "lat": {row[1]},
               "lon": {row[2]}
-          }},
-          "shipment_size": {{"weight_kg": {row[3]} }}
-
+        }},
+        "time_window": "07:00-18:00",
+        "shipment_size": {{ "weight_kg": {row[3]}}}
       }},
   """)
         row = cursor.fetchone()
@@ -57,12 +58,14 @@ def db_table_select_Last_Location():
     while row is not None:
         out.append(f"""\n{{
             "id": {row[0]},
-            "point": {{
+            "point":
+            {{
               "lat": {row[1]},
               "lon": {row[2]}
             }},
-            "shipment_size": {{"weight_kg": {row[3]} }}
-        }}
+        "time_window": "07:00-18:00",
+        "shipment_size": {{ "weight_kg": {row[3]}}}
+    }}
     """)
         row = cursor.fetchone()
     return ''.join(out[-1])
@@ -91,14 +94,16 @@ payload = (f'''{{
   "vehicles": [ {db_table_select_Auto()}
   {db_table_select_Last_Auto()}
   ],
-  "locations": [ {db_table_select_Location()}
-  {db_table_select_Last_Location()}
-  ],
   "options": {{
       "time_zone": 3,
-      "quality": "normal"
+      "quality": "normal",
+      "routing_mode": "truck"
+    }},
+  "locations": [ {db_table_select_Location()}
+  {db_table_select_Last_Location()}
+  ]
   }}
-}}''')
+''')
 
 Html_file = open('playload.json', 'w')
 Html_file.write(payload)
@@ -152,7 +157,10 @@ if response.status_code == requests.codes.accepted:
             for waypoint in route['route']:
                 point = waypoint['node']['value']['point']
                 yamaps_url += '{}%2c{}~'.format(point['lat'], point['lon'])
+                f = open('itog.txt', 'w')
+                f.write(yamaps_url)
 
             print ('')
             print ('See route on Yandex.Maps:')
             print (yamaps_url)
+            print ('https://yandex.ru/courier/mvrp-map/#/c7242fab-73bc3b4d-9ece9179-8f815b62?route=0')
