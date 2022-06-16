@@ -14,8 +14,13 @@ def db_table_select_Auto():
     while row is not None:
         out.append(f"""\n{{
             "id": {row[0]},
-            "capacity":{{"weight_kg": {row[1]} }}
-        }},
+            "capacity":{{"weight_kg": {row[1]} }},
+            "depot_id": [0],
+            "allow_different_depots_in_route":true,
+            "max_runs": 2, 
+            "shifts": [], 
+            "visited_locations": []
+            }},
     """)
         row = cursor.fetchone()
     out.pop()
@@ -27,8 +32,13 @@ def db_table_select_Last_Auto():
     while row is not None:
         out.append(f"""\n{{
             "id": {row[0]},
-            "capacity":{{"weight_kg": {row[1]} }}
-        }}
+            "capacity":{{"weight_kg": {row[1]} }},
+            "depot_id": [0],
+            "allow_different_depots_in_route":true,
+            "max_runs": 2, 
+            "shifts": [], 
+            "visited_locations": []
+            }}
     """)
         row = cursor.fetchone()
     return ''.join(out[-1])
@@ -164,3 +174,4 @@ if response.status_code == requests.codes.accepted:
             itog = str(f'https://yandex.ru/courier/mvrp-map/#/{request_id}')
             f = open('itog.txt', 'w')
             f.write(itog)
+            f.close()
