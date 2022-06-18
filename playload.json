@@ -1,13 +1,13 @@
 {
-  "depot": {
-      "id": 0,
-      "point": {
-          "lat": 57.156705,
-          "lon": 65.447281
+      "depot": {
+          "id": 0,
+          "point": {
+              "lat": 57.156705,
+              "lon": 65.447281
+          },
+          "time_window": "07:00-18:00"
       },
-      "time_window": "07:00-18:00"
-  },
-  "vehicles": [ 
+      "vehicles": [ 
 {
             "id": 1,
             "capacity":{"weight_kg": 250 },
@@ -28,7 +28,7 @@
             "visited_locations": []
             },
     
-  
+      
 {
             "id": 4,
             "capacity":{"weight_kg": 250 },
@@ -39,13 +39,13 @@
             "visited_locations": []
             }
     
-  ],
-  "options": {
-      "time_zone": 3,
-      "quality": "normal",
-      "routing_mode": "truck"
-    },
-  "locations": [ 
+      ],
+      "options": {
+          "time_zone": 3,
+          "quality": "normal",
+          "routing_mode": "truck"
+        },
+      "locations": [ 
 {
           "id": 2,
           "point":
@@ -146,17 +146,6 @@
       },
   
 {
-          "id": 14,
-          "point":
-          {
-              "lat": 57.120616,
-              "lon": 65.649892
-        },
-        "time_window": "07:00-18:00",
-        "shipment_size": { "weight_kg": 60}
-      },
-  
-{
           "id": 15,
           "point":
           {
@@ -167,17 +156,29 @@
         "shipment_size": { "weight_kg": 55}
       },
   
-  
 {
-            "id": 16,
-            "point":
-            {
+          "id": 16,
+          "point":
+          {
               "lat": 57.091875,
               "lon": 65.637759
-            },
+        },
         "time_window": "07:00-18:00",
         "shipment_size": { "weight_kg": 85}
+      },
+  
+      
+{
+            "id": 17,
+            "point":
+            {
+              "lat": 56.966516,
+              "lon": 65.765563
+            },
+        "time_window": "07:00-18:00",
+        "shipment_size": { "weight_kg": 65}
     }
     
-  ]
-  }
+      ]
+      }
+    
